@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>Gekman_RK2_Variant4.1</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+<body>
+   <header>
+       <div class="container">
+            <div class="header_menu">
+                <picture class="logo">
+                    <source
+                    media="(max-width: 900px)"
+                    srcset="./img/book-logo-srcset.png"/>
+                    <img class="img_logo" src="./img/book-logo.jpg" alt="img"/>
+                </picture>
+                <ul class="menu">
+                    <li><a href="#gt1" class="none_decoration font_bold">Английский</a></li>
+                    <li><a href="#gt2" class="none_decoration font_bold">Антиутопии</a></li>
+                    <li><a href="#gt3" class="none_decoration font_bold">Научпоп</a></li>
+                </ul>
+                <div>
+                    <input type="checkbox" name="" id=""> Темная тема
+                </div>
+            </div>
+        </div>
+   </header>
+   <main>
+       <div class="container">
+            <h1 class="title">bookcase подборки книг</h1>
+            <a name="gt1"></a>
+            <h3>Книги для начального чтения на английском языке</h3>
+            <div class="cards">
+                <div class="card">
+                    <div><img class="card_image" src="img/Harry_Potter.jpg" alt="img"></div>
+                    <div class="card_title">Harry Potter and the Philosopher`s Stone</div>           
+                </div>
+            
+                <div class="card">
+                    <div><img class="card_image" src="img/Harry_Potter.jpg" alt="img"></div>
+                    <div class="card_title font_regular">Harry Potter and the Philosopher`s Stone</div>           
+                </div>
+
+                <div class="card">
+                    <div><img class="card_image" src="img/Harry_Potter.jpg" alt="img"></div>
+                    <div class="card_title font_regular">Harry Potter and the Philosopher`s Stone</div>           
+                </div>
+            </div>
+
+            <a name="gt2"></a>
+            <h3>Антиутопии</h3>
+            <div class="cards">
+                <div class="card">
+                    <div><img class="card_image" src="img/451Farengejtu.jpg" alt="img"></div>
+                    <div class="card_title font_regular">451° по Фаренгейту</div>           
+                </div>
+            
+                <div class="card">
+                    <div><img class="card_image" src="img/451Farengejtu.jpg" alt="img"></div>
+                    <div class="card_title font_regular">451° по Фаренгейту</div>           
+                </div>
+
+                <div class="card">
+                    <div><img class="card_image" src="img/451Farengejtu.jpg" alt="img"></div>
+                    <div class="card_title font_regular">451° по Фаренгейту</div>           
+                </div>
+            </div>
+            <a name="gt3"></a>
+            <h3>Научпоп</h3>
+            <div class="cards">
+                <div class="card">
+                    <div><img class="card_image" src="img/Simpsony.jpg" alt="img"></div>
+                    <div class="card_title font_regular">Симпсоны и их математические секреты</div>           
+                </div>
+            
+                <div class="card">
+                    <div><img class="card_image" src="img/Simpsony.jpg" alt="img"></div>
+                    <div class="card_title font_regular">Симпсоны и их математические секреты</div>           
+                </div>
+                <div class="card">
+                    <div><img class="card_image" src="img/Simpsony.jpg" alt="img"></div>
+                    <div class="card_title font_regular">Симпсоны и их математические секреты</div>           
+                </div>
+            </div>
+            
+       
+
+      
+
+        <div id="app">
+            <br>
+            <form action="#">
+                <label>
+                    <div>Добавить элемент</div>
+
+                    <input
+                        v-on:input="validate()"
+                        
+                        v-model="nameInput"
+                        type="text"
+                    >
+                </label>
+
+                <input
+                :disabled="isDisabled"
+                v-on:click="addElements($event)"
+                type="submit"
+                value="Записать"
+            >
+            </form>
+
+            <ul class="list" v-if="elements.length">        
+                <li>Английский</li>
+                <li>Антиутопии</li>
+                <li>Научпоп</li>  
+                <li 
+                    v-for="element in elements" 
+                    :key="element.idLast"
+                
+                >
+                    {{ `${element.name}` }}
+                </li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                elements: [],
+
+                idLast: 0,
+
+                isDisabled: true,
+
+                nameInput: '',                
+            },
+            methods: {
+                addElements(e) {
+                    e.preventDefault();//стандартная обработка нажатия не работает(чтоб не обновлялась страница)
+                    this.idLast += 1;
+
+                   
+                    this.elements.push({//добавить в массив
+                        name: nameModified,
+                       
+                        id: this.idLast
+                    });
+
+                    this.clearForm();				
+                },
+
+                validate() {
+                    if (this.nameInput)
+                        this.isDisabled = false
+                    else
+                        this.isDisabled = true
+                },
+
+                clearForm() {
+                    
+                    this.nameInput = '';
+                    this.isDisabled = true;
+                }
+            },
+        })
+    </script>
+
+
+
+   </main>
+   <footer>
+       <div class="container">
+        <p class="color_white footer_text">Гекман Кирирлл Эдуардович 201-322 01.06.2021</p>
+       </div>
+   </footer>
+</body>
+</html>
